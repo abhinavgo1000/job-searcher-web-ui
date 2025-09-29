@@ -34,7 +34,8 @@ export default function SearchFilter({
     onIsStrictModeChange,
     onSearch,
 }: SearchFilterProps) {
-    const handleKeyPress = (event: React.KeyboardEvent) => {
+
+    const handleKeyUp = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
             onSearch();
         }
@@ -58,16 +59,16 @@ export default function SearchFilter({
                     label='Position'
                     value={position}
                     onChange={(e) => onPositionChange(e.target.value)}
-                    onKeyUp={handleKeyPress}
-                    variant='filled'
+                    onKeyUp={handleKeyUp}
+                    variant='outlined'
                     sx={{ width: '45%' }}
                 />
                 <TextField
                     label='Location'
                     value={location}
                     onChange={(e) => onLocationChange(e.target.value)}
-                    onKeyUp={handleKeyPress}
-                    variant='filled'
+                    onKeyUp={handleKeyUp}
+                    variant='outlined'
                     sx={{ width: '45%' }}
                 />
             </div>
@@ -76,7 +77,7 @@ export default function SearchFilter({
                     label='Workday URL (Optional)'
                     value={workDayUrl}
                     onChange={(e) => onWorkDayUrlChange && onWorkDayUrlChange(e.target.value)}
-                    onKeyUp={handleKeyPress}
+                    onKeyUp={handleKeyUp}
                     variant='filled'
                     sx={{ width: '91%' }}
                 />

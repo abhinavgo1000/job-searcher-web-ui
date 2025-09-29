@@ -68,12 +68,14 @@ export default function InsightFilter({
                     variant='outlined'
                     sx={{ width: '45%' }}
                 />
-                <div style={{ marginTop: '16px', marginBottom: '16px'}}>
-                    <NumberInput
-                        value={yearsExperience}
-                        onChange={onYearsExperienceChange}
-                        label='Years of Experience' />
-                </div>
+            </div>
+            <div style={{ marginTop: '16px', marginBottom: '16px'}}>
+                <NumberInput
+                    value={yearsExperience}
+                    onChange={onYearsExperienceChange}
+                    label='Years of Experience' />
+            </div>
+            <div>
                 <FormControlLabel
                     control={
                         <Switch
@@ -85,8 +87,6 @@ export default function InsightFilter({
                     label='Remote Only'
                     sx={{ marginLeft: '8px' }}
                 />
-            </div>
-            <div>
                 <Button
                     variant='contained'
                     color='primary'

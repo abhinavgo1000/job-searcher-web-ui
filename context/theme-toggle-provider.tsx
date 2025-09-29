@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 import theme from '@/theme';
 

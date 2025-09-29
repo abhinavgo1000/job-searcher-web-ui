@@ -5,10 +5,12 @@ const theme = createTheme({
     typography: {
         fontFamily: 'var(--font-roboto)',
     },
-    colorSchemes: {
-        dark: true
+    colorSchemes: { 
+        dark: true 
     },
-    cssVariables: true,
+    cssVariables: {
+        colorSchemeSelector: 'class'
+    }
 });
 
 export default theme;

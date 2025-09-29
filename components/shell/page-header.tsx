@@ -20,14 +20,12 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import Brightness3Icon from '@mui/icons-material/Brightness3';
 import LightModeIcon from '@mui/icons-material/LightMode';
-
-import { ThemeContext } from '@/context/theme-context';
-import path from 'path';
+import { useColorScheme } from '@mui/material';
 
 export default function PageHeader() {
 
     const [open, setOpen] = React.useState(false);
-    const { mode, toggleMode } = React.useContext(ThemeContext);
+    const { mode, setMode } = useColorScheme();
     const router = useRouter();
 
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -86,7 +84,7 @@ const DrawerList = (
                     <IconButton
                         sx={{ ml: 1 }}
                         color='inherit'
-                        onClick={toggleMode}
+                        onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}
                     >
                         {mode === 'light' ? <Brightness3Icon /> : <LightModeIcon />}
                     </IconButton>

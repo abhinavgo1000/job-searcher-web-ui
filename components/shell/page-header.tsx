@@ -22,6 +22,7 @@ import Brightness3Icon from '@mui/icons-material/Brightness3';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 import { ThemeContext } from '@/context/theme-context';
+import path from 'path';
 
 export default function PageHeader() {
 
@@ -33,11 +34,16 @@ export default function PageHeader() {
         setOpen(newOpen);
     };
 
+    const navigateTo = (path: string) => {
+        router.push(path);
+        setOpen(false);
+    };
+
     const drawerItems = [
-    { text: 'Job Search', icon: <SearchIcon /> },
-    { text: 'Insight Search', icon: <TravelExploreIcon /> },
-    { text: 'Saved Jobs', icon: <BookmarkIcon /> },
-    { text: 'Saved Insights', icon: <FolderSpecialIcon /> },
+    { text: 'Job Search', icon: <SearchIcon />, path: '/' },
+    { text: 'Insight Search', icon: <TravelExploreIcon />, path: '/job-insights' },
+    { text: 'Saved Jobs', icon: <BookmarkIcon />, path: '/saved-jobs' },
+    { text: 'Saved Insights', icon: <FolderSpecialIcon />, path: '/saved-insights' },
 ];
 
 const DrawerList = (
@@ -46,7 +52,7 @@ const DrawerList = (
             {drawerItems.map((item, index) => (
                 <React.Fragment key={item.text}>
                     <ListItem disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => navigateTo(item.path)}>
                             <ListItemIcon>
                                 {item.icon}
                             </ListItemIcon>

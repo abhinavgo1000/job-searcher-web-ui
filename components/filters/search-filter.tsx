@@ -78,7 +78,7 @@ export default function SearchFilter({
                     value={workDayUrl}
                     onChange={(e) => onWorkDayUrlChange && onWorkDayUrlChange(e.target.value)}
                     onKeyUp={handleKeyUp}
-                    variant='filled'
+                    variant='outlined'
                     sx={{ width: '91%' }}
                 />
             </div>

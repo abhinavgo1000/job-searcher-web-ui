@@ -3,17 +3,19 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 
 import SearchFilter from '@/components/filters/search-filter';
+import JobListEntry from '@/components/list-entries/job-list-entry';
+import { fetchJobListings, JobListing } from '@/networking/job-search';
 
 export default function JobSearchArea() {
     const [position, setPosition] = React.useState('');
     const [location, setLocation] = React.useState('');
     const [workDayUrl, setWorkDayUrl] = React.useState('');
     const [includeNetflix, setIncludeNetflix] = React.useState(false);
-    const [isStrictMode, setIsStrictMode] = React.useState(false);
+    const [strict, setStrict] = React.useState(false);
+    const [jobListings, setJobListings] = React.useState<JobListing[]>([]);
 
-    const handleSearch = () => {
-        // Implement the search logic here
-        console.log('Searching for:', { position, location, workDayUrl, includeNetflix, isStrictMode });
+    const handleSearch = async () => {
+        setJobListings(await fetchJobListings({ position, location, workday: workDayUrl || undefined, includeNetflix, strict }));
     };
 
     return (
@@ -27,10 +29,17 @@ export default function JobSearchArea() {
                 onWorkDayUrlChange={setWorkDayUrl}
                 includeNetflix={includeNetflix}
                 onIncludeNetflixChange={setIncludeNetflix}
-                isStrictMode={isStrictMode}
-                onIsStrictModeChange={setIsStrictMode}
+                isStrictMode={strict}
+                onIsStrictModeChange={setStrict}
                 onSearch={handleSearch}
             />
+            {jobListings.map((job, index) => (
+                <JobListEntry
+                    key={index}
+                    {...job}
+                />
+            ))}               
         </Box>
+
     );
 }

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 
 import ThemeToggleProvider from '@/context/theme-toggle-provider';
 import PageHeader from '@/components/shell/page-header';
+import PageFooter from '@/components/shell/page-footer';
 import './globals.css';
 
 const roboto = Roboto({
@@ -33,6 +34,7 @@ export default function RootLayout({
             <Box sx={{ padding: '16px' }}>
               {children}
             </Box>
+            <PageFooter />
           </ThemeToggleProvider>
         </AppRouterCacheProvider>
       </body>

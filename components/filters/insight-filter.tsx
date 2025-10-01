@@ -44,12 +44,12 @@ export default function InsightFilter({
             noValidate
             autoComplete='off'
             sx={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    gap: '16px', 
-                    marginBottom: '24px',
-                    '& .MuiTextField-root': { m: 1 }
-                }}
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '16px', 
+                marginBottom: '24px',
+                '& .MuiTextField-root': { m: 1 }
+            }}
         >
             <div>
                 <TextField

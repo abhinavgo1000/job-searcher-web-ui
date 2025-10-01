@@ -42,7 +42,7 @@ export default function InsightSearchArea() {
             />
             {!searchTapped && (
                 <Card variant='outlined' sx={{ padding: '16px', marginTop: '16px' }}>
-                    <Typography variant='body2'>Please enter search criteria and tap "Search" to find job insights.</Typography>
+                    <Typography variant='body2'>Please enter search criteria and tap &quot;Search&quot; to find job insights.</Typography>
                 </Card>
             )}
             {searchTapped && isLoading && (

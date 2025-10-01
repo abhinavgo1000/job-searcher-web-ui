@@ -9,35 +9,35 @@ import PageFooter from '@/components/shell/page-footer';
 import './globals.css';
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto',
+    weight: ['300', '400', '500', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-roboto',
 });
 
 export const metadata: Metadata = {
-  title: 'Job Searcher',
-  description: 'A web UI frontend written in Next.js to display the Agentic AI job search output',
+    title: 'Job Searcher',
+    description: 'A web UI frontend written in Next.js to display the Agentic AI job search output',
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang='en' className={roboto.variable}>
-      <body>
-        <AppRouterCacheProvider>
-          <ThemeToggleProvider>
-            <PageHeader />
-            <Box sx={{ padding: '16px' }}>
-              {children}
-            </Box>
-            <PageFooter />
-          </ThemeToggleProvider>
-        </AppRouterCacheProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang='en' className={roboto.variable}>
+            <body>
+                <AppRouterCacheProvider>
+                    <ThemeToggleProvider>
+                        <PageHeader />
+                        <Box sx={{ padding: '16px' }}>
+                            {children}
+                        </Box>
+                        <PageFooter />
+                    </ThemeToggleProvider>
+                </AppRouterCacheProvider>
+            </body>
+        </html>
+    );
 }

@@ -45,7 +45,7 @@ export default function JobSearchArea() {
             />
             {!searchTapped && (
                 <Card variant='outlined' sx={{ padding: '16px', marginTop: '16px' }}>
-                    <Typography variant='body2'>Please enter search criteria and tap "Search" to find job listings.</Typography>
+                    <Typography variant='body2'>Please enter search criteria and tap &quot;Search&quot; to find job listings.</Typography>
                 </Card>
             )}
             {searchTapped && isLoading && (

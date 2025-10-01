@@ -38,31 +38,31 @@ export default function PageHeader() {
     };
 
     const drawerItems = [
-    { text: 'Job Search', icon: <SearchIcon />, path: '/' },
-    { text: 'Insight Search', icon: <TravelExploreIcon />, path: '/job-insights' },
-    { text: 'Saved Jobs', icon: <BookmarkIcon />, path: '/saved-jobs' },
-    { text: 'Saved Insights', icon: <FolderSpecialIcon />, path: '/saved-insights' },
-];
+        { text: 'Job Search', icon: <SearchIcon />, path: '/' },
+        { text: 'Insight Search', icon: <TravelExploreIcon />, path: '/job-insights' },
+        { text: 'Saved Jobs', icon: <BookmarkIcon />, path: '/saved-jobs' },
+        { text: 'Saved Insights', icon: <FolderSpecialIcon />, path: '/saved-insights' },
+    ];
 
-const DrawerList = (
-    <Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
-        <List>
-            {drawerItems.map((item, index) => (
-                <React.Fragment key={item.text}>
-                    <ListItem disablePadding>
-                        <ListItemButton onClick={() => navigateTo(item.path)}>
-                            <ListItemIcon>
-                                {item.icon}
-                            </ListItemIcon>
-                            <ListItemText primary={item.text} />
-                        </ListItemButton>
-                    </ListItem>
-                    {index < drawerItems.length - 1 && <Divider />}
-                </React.Fragment>
-            ))}
-        </List>
-    </Box>
-);
+    const DrawerList = (
+        <Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
+            <List>
+                {drawerItems.map((item, index) => (
+                    <React.Fragment key={item.text}>
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => navigateTo(item.path)}>
+                                <ListItemIcon>
+                                    {item.icon}
+                                </ListItemIcon>
+                                <ListItemText primary={item.text} />
+                            </ListItemButton>
+                        </ListItem>
+                        {index < drawerItems.length - 1 && <Divider />}
+                    </React.Fragment>
+                ))}
+            </List>
+        </Box>
+    );
 
     return (
         <Box sx={{ flexGrow: 1 }}>

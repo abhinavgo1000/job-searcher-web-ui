@@ -35,14 +35,14 @@ export default function DataDialog(props: DataDialogProps) {
         <React.Fragment>
             <BootstrapDialog
                 onClose={props.onCloseDialog}
-                aria-labelledby="customized-dialog-title"
+                aria-labelledby='customized-dialog-title'
                 open={props.open}
             >
-                <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+                <DialogTitle sx={{ m: 0, p: 2 }} id='customized-dialog-title'>
                     {props.dialogTitle}
                 </DialogTitle>
                 <IconButton
-                    aria-label="close"
+                    aria-label='close'
                     onClick={props.onCloseDialog}
                     sx={(theme) => ({
                         position: 'absolute',

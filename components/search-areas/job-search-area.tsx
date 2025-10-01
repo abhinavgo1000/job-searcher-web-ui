@@ -1,6 +1,10 @@
 'use client';
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 
 import SearchFilter from '@/components/filters/search-filter';
 import JobListEntry from '@/components/list-entries/job-list-entry';
@@ -12,10 +16,16 @@ export default function JobSearchArea() {
     const [workDayUrl, setWorkDayUrl] = React.useState('');
     const [includeNetflix, setIncludeNetflix] = React.useState(false);
     const [strict, setStrict] = React.useState(false);
+    const [searchTapped, setSearchTapped] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
     const [jobListings, setJobListings] = React.useState<JobListing[]>([]);
 
     const handleSearch = async () => {
-        setJobListings(await fetchJobListings({ position, location, workday: workDayUrl || undefined, includeNetflix, strict }));
+        setSearchTapped(true);
+        setIsLoading(true);
+        const results = await fetchJobListings({ position, location, workday: workDayUrl || undefined, includeNetflix, strict });
+        setJobListings(results);
+        setIsLoading(false);
     };
 
     return (
@@ -33,7 +43,26 @@ export default function JobSearchArea() {
                 onIsStrictModeChange={setStrict}
                 onSearch={handleSearch}
             />
-            {jobListings.map((job, index) => (
+            {!searchTapped && (
+                <Card variant='outlined' sx={{ padding: '16px', marginTop: '16px' }}>
+                    <Typography variant='body2'>Please enter search criteria and tap "Search" to find job listings.</Typography>
+                </Card>
+            )}
+            {searchTapped && isLoading && (
+                <Card variant='outlined' sx={{ padding: '16px', marginTop: '16px' }}>
+                    <Stack spacing={1}>
+                        <Skeleton variant='text' />
+                        <Skeleton variant='rectangular' />
+                        <Skeleton variant='rectangular' />
+                    </Stack>
+                </Card>
+            )}
+            {searchTapped && !isLoading && jobListings.length === 0 && (
+                <Card variant='outlined' sx={{ padding: '16px', marginTop: '16px' }}>
+                    <Typography variant='body2'>No job listings found. Please adjust your search criteria and try again.</Typography>
+                </Card>
+            )}
+            {searchTapped && !isLoading && jobListings.length > 0 && jobListings.map((job, index) => (
                 <JobListEntry
                     key={index}
                     {...job}

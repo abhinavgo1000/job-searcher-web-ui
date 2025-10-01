@@ -4,7 +4,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5
 
 export interface InsightSearchParams {
     position: string;
-    companies: string[];
+    companies: string;
     yearsExperience: number;
     remote: boolean;
 }

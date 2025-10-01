@@ -62,7 +62,7 @@ export default function InsightFilter({
                 />
                 <TextField
                     label='Companies (comma separated)'
-                    value={companies.join(', ')}
+                    value={companies.join(',')}
                     onChange={(e) => onCompaniesChange(e.target.value.split(',').map(c => c.trim()))}
                     onKeyUp={handleKeyUp}
                     variant='outlined'

@@ -22,7 +22,7 @@ export default function InsightSearchArea() {
     const handleSearch = async () => {
         setSearchTapped(true);
         setIsLoading(true);
-        const results = await fetchInsights({ position, companies: companies, yearsExperience, remote: isRemote });
+        const results = await fetchInsights({ position, companies: companies.join(','), yearsExperience, remote: isRemote });
         setInsights(results);
         setIsLoading(false);
     };

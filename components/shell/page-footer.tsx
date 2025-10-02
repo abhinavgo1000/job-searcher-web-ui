@@ -5,7 +5,7 @@ import Link from '@mui/material/Link';
 
 export default function PageFooter() {
     return (
-        <Box sx={{ padding: '16px', textAlign: 'center' }}>
+        <Box component='footer' sx={{ padding: '16px', textAlign: 'center' }}>
             <Typography variant="body2" color="textSecondary">
                 &copy; {new Date().getFullYear()} Abhinav Goel. All rights reserved.
             </Typography>

@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import { NumberField } from '@base-ui-components/react/number-field';
+import { styled } from '@mui/material/styles';
 
 import styles from './number-input.module.css';
 
@@ -54,6 +55,12 @@ function MinusIcon(props: React.ComponentProps<'svg'>) {
     );
 }
 
+const Label = styled('label')(({ theme }) => ({
+    ...theme.typography.body2,
+    backgroundColor: (theme.vars || theme).palette.background.paper,
+    padding: theme.spacing(1),
+}));
+
 export default function NumberInput(props: {
     value: number;
     onChange: (newValue: number) => void;
@@ -82,9 +89,9 @@ export default function NumberInput(props: {
             }}
         >
             <NumberField.ScrubArea className={styles.ScrubArea}>
-                <label htmlFor={id} className={styles.Label}>
+                <Label htmlFor={id}>
                     {label}
-                </label>
+                </Label>
                 <NumberField.ScrubAreaCursor className={styles.ScrubAreaCursor}>
                     <CursorGrowIcon />
                 </NumberField.ScrubAreaCursor>

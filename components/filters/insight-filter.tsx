@@ -17,6 +17,7 @@ interface InsightFilterProps {
     onYearsExperienceChange: (newYearsExperience: number) => void;
     isRemote: boolean;
     onIsSRemoteChange: (newRemote: boolean) => void;
+    isSearchButtonDisabled?: boolean;
     onSearch: () => void;
 }
 
@@ -29,6 +30,7 @@ export default function InsightFilter({
     onYearsExperienceChange,
     isRemote,
     onIsSRemoteChange,
+    isSearchButtonDisabled,
     onSearch,
 }: InsightFilterProps) {
 
@@ -90,6 +92,7 @@ export default function InsightFilter({
                 <Button
                     variant='contained'
                     color='primary'
+                    disabled={isSearchButtonDisabled}
                     startIcon={<SearchIcon />}
                     onClick={onSearch}
                     sx={{ margin: '8px' }}

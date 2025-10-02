@@ -18,6 +18,7 @@ interface SearchFilterProps {
     onIncludeNetflixChange: (newIncludeNetflix: boolean) => void;
     isStrictMode: boolean;
     onIsStrictModeChange: (newIsStrictMode: boolean) => void;
+    isSearchButtonDisabled?: boolean;
     onSearch: () => void;
 }
 
@@ -32,6 +33,7 @@ export default function SearchFilter({
     onWorkDayUrlChange,
     isStrictMode,
     onIsStrictModeChange,
+    isSearchButtonDisabled,
     onSearch,
 }: SearchFilterProps) {
 
@@ -106,6 +108,7 @@ export default function SearchFilter({
                 <Button
                     variant='contained'
                     color='primary'
+                    disabled={isSearchButtonDisabled}
                     startIcon={<SearchIcon />}
                     onClick={onSearch}
                 >

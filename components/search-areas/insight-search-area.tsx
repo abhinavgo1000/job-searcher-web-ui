@@ -15,9 +15,15 @@ export default function InsightSearchArea() {
     const [companies, setCompanies] = React.useState<string[]>([]);
     const [yearsExperience, setYearsExperience] = React.useState(0);
     const [isRemote, setIsRemote] = React.useState(false);
+    const [isSearchButtonDisabled, setIsSearchButtonDisabled] = React.useState(true);
     const [searchTapped, setSearchTapped] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [insights, setInsights] = React.useState<Insight[]>([]);
+
+    React.useEffect(() => {
+        const isDisabled = position.trim() === '' || companies.length === 0 || yearsExperience < 0;
+        setIsSearchButtonDisabled(isDisabled);
+    }, [position, companies, yearsExperience]);
 
     const handleSearch = async () => {
         setSearchTapped(true);
@@ -38,6 +44,7 @@ export default function InsightSearchArea() {
                 onYearsExperienceChange={setYearsExperience}
                 isRemote={isRemote}
                 onIsSRemoteChange={setIsRemote}
+                isSearchButtonDisabled={isSearchButtonDisabled}
                 onSearch={handleSearch}
             />
             {!searchTapped && (

@@ -16,9 +16,15 @@ export default function JobSearchArea() {
     const [workDayUrl, setWorkDayUrl] = React.useState('');
     const [includeNetflix, setIncludeNetflix] = React.useState(false);
     const [strict, setStrict] = React.useState(false);
+    const [isSearchButtonDisabled, setIsSearchButtonDisabled] = React.useState(true);
     const [searchTapped, setSearchTapped] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [jobListings, setJobListings] = React.useState<JobListing[]>([]);
+
+    React.useEffect(() => {
+        const isDisabled = position.trim() === '' || location.trim() === '';
+        setIsSearchButtonDisabled(isDisabled);
+    }, [position, location]);
 
     const handleSearch = async () => {
         setSearchTapped(true);
@@ -41,6 +47,7 @@ export default function JobSearchArea() {
                 onIncludeNetflixChange={setIncludeNetflix}
                 isStrictMode={strict}
                 onIsStrictModeChange={setStrict}
+                isSearchButtonDisabled={isSearchButtonDisabled}
                 onSearch={handleSearch}
             />
             {!searchTapped && (

@@ -1,4 +1,8 @@
 import { run } from '@openai/agents';
+import type { AgentInputItem } from '@openai/agents';
+import { setDefaultOpenAIKey } from '@openai/agents';
+
+setDefaultOpenAIKey(process.env.OPENAI_API_KEY || '');
 
 import { techStackResearcher } from '@/agents/agents';
 
@@ -14,20 +18,19 @@ export async function GET(request: Request) {
         return new Response(JSON.stringify({ error: 'At least one of position, companies, or years of experience must be provided.' }), { status: 400 });
     }
 
-    // Construct the query parameters
-    const queryParams = new URLSearchParams();
-    if (position) queryParams.append('position', position);
-    if (companies) queryParams.append('companies', companies);
-    if (yearsExperience) queryParams.append('yearsExperience', yearsExperience.toString());
-    if (remote) queryParams.append('remote', remote.toString());
+    const agentInput: AgentInputItem[] = [];
 
     try {
-        const response = await fetch(`${process.env.BACKEND_API_URL || 'http://localhost:5057'}/job-insights?${queryParams.toString()}`);
-        if (!response.ok) {
-            return new Response(JSON.stringify({ error: 'Failed to fetch job insights from backend.' }), { status: response.status });
-        }
-        const data = await response.json();
-        return new Response(JSON.stringify(data), { status: 200 });
+        const result = await run(
+            techStackResearcher,
+            agentInput.concat({
+                role: 'user',
+                content: `Analyze the following job search parameters and provide detailed job insights including required skills, 
+                proficiency levels, and feedback for a candidate looking for a position as ${position} 
+                at companies like ${companies} with ${yearsExperience} years of experience ${remote ? ' in a remote role' : ''}.`
+            })
+        );
+        return new Response(JSON.stringify(result.finalOutput?.insights), { status: 200 });
     } catch (error) {
         return new Response(JSON.stringify({ error: 'An error occurred while fetching job insights.' }), { status: 500 });
     }

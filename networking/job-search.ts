@@ -11,7 +11,7 @@ export interface JobSearchParams {
 }
 
 interface Compensation {
-    min: number | undefined ;
+    min: number | undefined;
     max: number | undefined;
     currency: string | undefined;
     period: string | undefined;

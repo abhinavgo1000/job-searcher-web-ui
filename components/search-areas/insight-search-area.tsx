@@ -15,6 +15,8 @@ export default function InsightSearchArea() {
     const [companies, setCompanies] = React.useState<string[]>([]);
     const [yearsExperience, setYearsExperience] = React.useState(0);
     const [isRemote, setIsRemote] = React.useState(false);
+    const [positionError, setPositionError] = React.useState('');
+    const [companiesError, setCompaniesError] = React.useState('');
     const [isSearchButtonDisabled, setIsSearchButtonDisabled] = React.useState(true);
     const [searchTapped, setSearchTapped] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
@@ -26,6 +28,16 @@ export default function InsightSearchArea() {
     }, [position, companies, yearsExperience]);
 
     const handleSearch = async () => {
+        if (position.trim() === '') {
+            setPositionError('Position is required.');
+        } else {
+            setPositionError('');
+        }
+        if (companies.length === 0) {
+            setCompaniesError('At least one company is required.');
+        } else {
+            setCompaniesError('');
+        }
         setSearchTapped(true);
         setIsLoading(true);
         const results = await fetchInsights({ position, companies: companies.join(','), yearsExperience, remote: isRemote });
@@ -44,6 +56,8 @@ export default function InsightSearchArea() {
                 onYearsExperienceChange={setYearsExperience}
                 isRemote={isRemote}
                 onIsSRemoteChange={setIsRemote}
+                positionError={positionError}
+                companiesError={companiesError}
                 isSearchButtonDisabled={isSearchButtonDisabled}
                 onSearch={handleSearch}
             />

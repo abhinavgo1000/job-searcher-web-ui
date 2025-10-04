@@ -11,8 +11,10 @@ import NumberInput from './number-input/number-input';
 interface InsightFilterProps {
     position: string;
     onPositionChange: (newPosition: string) => void;
+    positionError?: string;
     companies: string[];
     onCompaniesChange: (newCompanies: string[]) => void;
+    companiesError?: string;
     yearsExperience: number;
     onYearsExperienceChange: (newYearsExperience: number) => void;
     isRemote: boolean;
@@ -21,24 +23,7 @@ interface InsightFilterProps {
     onSearch: () => void;
 }
 
-export default function InsightFilter({
-    position,
-    onPositionChange,
-    companies,
-    onCompaniesChange,
-    yearsExperience,
-    onYearsExperienceChange,
-    isRemote,
-    onIsSRemoteChange,
-    isSearchButtonDisabled,
-    onSearch,
-}: InsightFilterProps) {
-
-    const handleKeyUp = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            onSearch();
-        }
-    };
+export default function InsightFilter(props: InsightFilterProps) {
 
     return (
         <Box 
@@ -56,33 +41,37 @@ export default function InsightFilter({
             <div>
                 <TextField
                     label='Position'
-                    value={position}
-                    onChange={(e) => onPositionChange(e.target.value)}
-                    onKeyUp={handleKeyUp}
+                    value={props.position}
+                    required
+                    onChange={(e) => props.onPositionChange(e.target.value)}
+                    error={!!props.positionError}
+                    helperText={props.positionError}
                     variant='outlined'
                     sx={{ width: '45%' }}
                 />
                 <TextField
                     label='Companies (comma separated)'
-                    value={companies.join(',')}
-                    onChange={(e) => onCompaniesChange(e.target.value.split(',').map(c => c.trim()))}
-                    onKeyUp={handleKeyUp}
+                    value={props.companies.join(',')}
+                    required
+                    onChange={(e) => props.onCompaniesChange(e.target.value.split(',').map(c => c.trim()))}
+                    error={!!props.companiesError}
+                    helperText={props.companiesError}
                     variant='outlined'
                     sx={{ width: '45%' }}
                 />
             </div>
             <div style={{ marginTop: '16px', marginBottom: '16px'}}>
                 <NumberInput
-                    value={yearsExperience}
-                    onChange={onYearsExperienceChange}
+                    value={props.yearsExperience}
+                    onChange={props.onYearsExperienceChange}
                     label='Years of Experience' />
             </div>
             <div>
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={isRemote}
-                            onChange={(e) => onIsSRemoteChange(e.target.checked)}
+                            checked={props.isRemote}
+                            onChange={(e) => props.onIsSRemoteChange(e.target.checked)}
                             color='primary'
                         />
                     }
@@ -92,9 +81,9 @@ export default function InsightFilter({
                 <Button
                     variant='contained'
                     color='primary'
-                    disabled={isSearchButtonDisabled}
+                    disabled={props.isSearchButtonDisabled}
                     startIcon={<SearchIcon />}
-                    onClick={onSearch}
+                    onClick={props.onSearch}
                     sx={{ margin: '8px' }}
                 >
                     Search

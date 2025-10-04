@@ -1,4 +1,8 @@
 import { run } from '@openai/agents';
+import type { AgentInputItem } from '@openai/agents';
+import { setDefaultOpenAIKey } from '@openai/agents';
+
+setDefaultOpenAIKey(process.env.OPENAI_API_KEY || '');
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);

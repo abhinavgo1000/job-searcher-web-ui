@@ -10,8 +10,10 @@ import SearchIcon from '@mui/icons-material/Search';
 interface SearchFilterProps {
     position: string;
     onPositionChange: (newPosition: string) => void;
+    positionError?: string;
     location: string;
     onLocationChange: (newLocation: string) => void;
+    locationError?: string;
     workDayUrl?: string;
     onWorkDayUrlChange?: (newUrl: string) => void;
     includeNetflix: boolean;
@@ -22,26 +24,7 @@ interface SearchFilterProps {
     onSearch: () => void;
 }
 
-export default function SearchFilter({
-    position,
-    onPositionChange,
-    location,
-    onLocationChange,
-    includeNetflix,
-    onIncludeNetflixChange,
-    workDayUrl,
-    onWorkDayUrlChange,
-    isStrictMode,
-    onIsStrictModeChange,
-    isSearchButtonDisabled,
-    onSearch,
-}: SearchFilterProps) {
-
-    const handleKeyUp = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            onSearch();
-        }
-    };
+export default function SearchFilter(props: SearchFilterProps) {
 
     return (
         <Box 
@@ -59,17 +42,21 @@ export default function SearchFilter({
             <div>
                 <TextField
                     label='Position'
-                    value={position}
-                    onChange={(e) => onPositionChange(e.target.value)}
-                    onKeyUp={handleKeyUp}
+                    value={props.position}
+                    required
+                    onChange={(e) => props.onPositionChange(e.target.value)}
+                    error={!!props.positionError}
+                    helperText={props.positionError}
                     variant='outlined'
                     sx={{ width: '45%' }}
                 />
                 <TextField
                     label='Location'
-                    value={location}
-                    onChange={(e) => onLocationChange(e.target.value)}
-                    onKeyUp={handleKeyUp}
+                    value={props.location}
+                    required
+                    onChange={(e) => props.onLocationChange(e.target.value)}
+                    error={!!props.locationError}
+                    helperText={props.locationError}
                     variant='outlined'
                     sx={{ width: '45%' }}
                 />
@@ -77,9 +64,8 @@ export default function SearchFilter({
             <div>
                 <TextField
                     label='Workday URL (Optional)'
-                    value={workDayUrl}
-                    onChange={(e) => onWorkDayUrlChange && onWorkDayUrlChange(e.target.value)}
-                    onKeyUp={handleKeyUp}
+                    value={props.workDayUrl}
+                    onChange={(e) => props.onWorkDayUrlChange && props.onWorkDayUrlChange(e.target.value)}
                     variant='outlined'
                     sx={{ width: '91%' }}
                 />
@@ -88,8 +74,8 @@ export default function SearchFilter({
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={includeNetflix}
-                            onChange={(e) => onIncludeNetflixChange(e.target.checked)}
+                            checked={props.includeNetflix}
+                            onChange={(e) => props.onIncludeNetflixChange(e.target.checked)}
                             color='primary'
                         />
                     }
@@ -98,8 +84,8 @@ export default function SearchFilter({
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={isStrictMode}
-                            onChange={(e) => onIsStrictModeChange(e.target.checked)}
+                            checked={props.isStrictMode}
+                            onChange={(e) => props.onIsStrictModeChange(e.target.checked)}
                             color='primary'
                         />
                     }
@@ -108,9 +94,9 @@ export default function SearchFilter({
                 <Button
                     variant='contained'
                     color='primary'
-                    disabled={isSearchButtonDisabled}
+                    disabled={props.isSearchButtonDisabled}
                     startIcon={<SearchIcon />}
-                    onClick={onSearch}
+                    onClick={props.onSearch}
                 >
                     Search
                 </Button>

@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { run } from '@openai/agents';
 import type { AgentInputItem } from '@openai/agents';
 import { setDefaultOpenAIKey } from '@openai/agents';
@@ -15,7 +16,7 @@ export async function GET(request: Request) {
 
     // Validate parameters
     if (!position && !companies && !yearsExperience) {
-        return new Response(JSON.stringify({ error: 'At least one of position, companies, or years of experience must be provided.' }), { status: 400 });
+        return new NextResponse(JSON.stringify({ error: 'At least one of position, companies, or years of experience must be provided.' }), { status: 400 });
     }
 
     const agentInput: AgentInputItem[] = [];
@@ -30,8 +31,8 @@ export async function GET(request: Request) {
                 at companies like ${companies} with ${yearsExperience} years of experience ${remote ? ' in a remote role' : ''}.`
             })
         );
-        return new Response(JSON.stringify(result.finalOutput?.insights), { status: 200 });
+        return new NextResponse(JSON.stringify(result.finalOutput?.insights), { status: 200 });
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'An error occurred while fetching job insights.' }), { status: 500 });
+        return new NextResponse(JSON.stringify({ error: 'An error occurred while fetching job insights.' }), { status: 500 });
     }
 }

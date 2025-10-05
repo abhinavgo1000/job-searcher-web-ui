@@ -15,7 +15,7 @@ export const JobListing = z.object({
     title: z.string(),
     location: z.string().optional().nullable(),
     remote: z.boolean().optional().nullable(),
-    tech_stack: z.array(z.string()),
+    techStack: z.array(z.string()),
     compensation: (Compensation).optional().nullable(),
     url: z.string().optional().nullable(),
     jobId: z.string().optional().nullable(),

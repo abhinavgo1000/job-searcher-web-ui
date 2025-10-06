@@ -1,6 +1,7 @@
 import { Agent } from '@openai/agents';
 
 import { serperWebSearch } from '@/tools/web-searcher';
+import { webScraper } from '@/tools/web-scraper';
 import { MultiJobInsights } from '@/models/job-insight';
 
 // TechStackResearcher agent
@@ -10,6 +11,7 @@ export const techStackResearcher = new Agent({
         `You are an expert tech job analyst for the Indian market.
         Given filter parameters (position name, targeted companies, years of experience, remote or not), analyze each job and produce a MultiJobInsights object.
         For each job, use the serperWebSearch tool to research the latest skill requirements and trends for the given position, company, experience level, and remote status.
+        Use the serperWebSearch tool to extract the description from any job boards otherwise not easily available.
         In your analysis, provide:
             - A concise summary of the overall skills and tech stack required.
             - A list of skills, where each skill includes:
@@ -25,7 +27,7 @@ export const techStackResearcher = new Agent({
     ),
     handoffDescription: 'A job insights researcher for multiple jobs with skill categorization, feedback, and web search research',
     outputType: MultiJobInsights,
-    tools: [serperWebSearch],  // Register the tool with the agent
+    tools: [serperWebSearch, webScraper],  // Register the tool with the agent
 });
 
 // Note: The tools and handoffs are commented out as placeholders. You need to implement or import the actual tool and handoff agents for this to work correctly.
